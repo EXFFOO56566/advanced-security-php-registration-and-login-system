@@ -1,0 +1,829 @@
+<!doctype html>  
+<!--[if IE 6 ]><html lang="en-us" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="en-us" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en-us" class="ie8"> <![endif]-->
+<!--[if (gt IE 7)|!(IE)]><!-->
+<html lang="en-us"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	
+	<title>Advanced Security - PHP Register/Login System</title>
+	
+	<meta name="description" content="">
+	<meta name="author" content="Milos Stojanovic">
+	<meta name="copyright" content="Milos Stojanovic">
+	<meta name="generator" content="Documenter v2.0 http://rxa.li/documenter">
+	<meta name="date" content="2014-05-03T00:00:00+02:00">
+	
+	<link rel="stylesheet" href="assets/css/documenter_style.css" media="all">
+	<link rel="stylesheet" href="assets/js/google-code-prettify/prettify.css" media="screen">
+	<script src="assets/js/google-code-prettify/prettify.js"></script>
+
+	
+	
+	<script src="assets/js/jquery.js"></script>
+	
+	<script src="assets/js/jquery.scrollTo.js"></script>
+	<script src="assets/js/jquery.easing.js"></script>
+	
+	<script>document.createElement('section');var duration='500',easing='swing';</script>
+	<script src="assets/js/script.js"></script>
+	
+	<style>
+		html{background-color:#FFFFFF;color:#383838;}
+		::-moz-selection{background:#444444;color:#DDDDDD;}
+		::selection{background:#444444;color:#DDDDDD;}
+		#documenter_sidebar #documenter_logo{background-image:url();}
+		a{color:#0000FF;}
+		.btn {
+			border-radius:3px;
+		}
+		.btn-primary {
+			  background-image: -moz-linear-gradient(top, #0088CC, #0044CC);
+			  background-image: -ms-linear-gradient(top, #0088CC, #0044CC);
+			  background-image: -webkit-gradient(linear, 0 0, 0 0088CC%, from(#DDDDDD), to(#0044CC));
+			  background-image: -webkit-linear-gradient(top, #0088CC, #0044CC);
+			  background-image: -o-linear-gradient(top, #0088CC, #0044CC);
+			  background-image: linear-gradient(top, #0088CC, #0044CC);
+			  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088CC', endColorstr='#0044CC', GradientType=0);
+			  border-color: #0044CC #0044CC #bfbfbf;
+			  color:#FFFFFF;
+		}
+		.btn-primary:hover,
+		.btn-primary:active,
+		.btn-primary.active,
+		.btn-primary.disabled,
+		.btn-primary[disabled] {
+		  border-color: #0088CC #0088CC #bfbfbf;
+		  background-color: #0044CC;
+		}
+		hr{border-top:1px solid #EBEBEB;border-bottom:1px solid #FFFFFF;}
+		#documenter_sidebar, #documenter_sidebar ul a{background-color:#DDDDDD;color:#222222;}
+		#documenter_sidebar ul a{-webkit-text-shadow:1px 1px 0px #EEEEEE;-moz-text-shadow:1px 1px 0px #EEEEEE;text-shadow:1px 1px 0px #EEEEEE;}
+		#documenter_sidebar ul{border-top:1px solid #AAAAAA;}
+		#documenter_sidebar ul a{border-top:1px solid #EEEEEE;border-bottom:1px solid #AAAAAA;color:#444444;}
+		#documenter_sidebar ul a:hover{background:#444444;color:#DDDDDD;border-top:1px solid #444444;}
+		#documenter_sidebar ul a.current{background:#444444;color:#DDDDDD;border-top:1px solid #444444;}
+		#documenter_copyright{display:block !important;visibility:visible !important;}
+	</style>
+	
+</head>
+<body class="documenter-project-advanced-security">
+	<div id="documenter_sidebar">
+		<a href="#documenter_cover" id="documenter_logo"></a>
+		<ul id="documenter_nav">
+			<li><a class="current" href="#documenter_cover">Start</a></li>
+				
+			<li><a href="#what_is_advanced_security" title="What Is Advanced Security?">What Is Advanced Security?</a></li>
+			<li><a href="#security" title="Security">Security</a></li>
+			<li><a href="#installation" title="Installation">Installation</a></li>
+			<li><a href="#logging_in" title="Logging In">Logging In</a></li>
+			<li><a href="#registration" title="Registration">Registration</a></li>
+			<li><a href="#password_reset" title="Password Reset">Password Reset</a></li>
+			<li><a href="#social_login" title="Social Login">Social Login</a></li>
+			<li><a href="#post_comments" title="Post Comments">Post Comments</a></li>
+			<li><a href="#change_password" title="Change Password">Change Password</a></li>
+			<li><a href="#update_details" title="Update Details">Update Details</a></li>
+			<li><a href="#user_management" title="User Management">User Management</a></li>
+			<li><a href="#language" title="Language">Language</a></li>
+			<li><a href="#additional_configuration" title="Additional Configuration">Additional Configuration</a></li>
+			<li><a href="#using_the_engine" title="Using The Engine">Using The Engine</a></li>
+			<li><a href="#session" title="Session">Session</a></li>
+			<li><a href="#working_with_asuser_class" title="Working With ASUser Class">Working With ASUser Class</a></li>
+			<li><a href="#database_queries" title="Database Queries">Database Queries</a></li>
+			<li><a href="#working_with_comments" title="Working With Comments">Working With Comments</a></li>
+			<li><a href="#assets" title="Assets">Assets</a></li>
+			<li><a href="#changelog" title="Changelog">Changelog</a></li>
+
+		</ul>
+		<div id="documenter_copyright">Copyright Milos Stojanovic 2014<br>
+		made with the <a href="http://rxa.li/documenter">Documenter v2.0</a> 
+		</div>
+	</div>
+	<div id="documenter_content">
+	<section id="documenter_cover">
+	<h1>Advanced Security</h1>
+	<h2>PHP Register/Login System</h2>
+	<div id="documenter_buttons">
+		
+	</div>
+	<hr>
+	<ul>
+	<li>created: 08/02/2013</li>
+	<li>latest update: 05/03/2014</li>
+	<li>by: Milos Stojanovic</li>
+	
+	
+	</ul>
+	<p></p>
+	</section>
+	
+	<section id="what_is_advanced_security">
+	<div class="page-header"><h3>What Is Advanced Security?</h3><hr class="notop"></div>
+<p>
+	Advanced Security is<strong> Register/Login and User Management System with high security</strong>, developed using pure PHP and MySQL database.</p>
+<p>
+	Lets say you have your own website and you want to extend it by adding user registration and login system. Insted of coding for few days and thinking about all security holes, you can just take this system, install it, and your work is done.</p>
+<p>
+	Just add two lines of code on top of your old pages to allow only registred users to access them and that&#39;s it.&nbsp;</p>
+<p>
+	Advanced Security classes offer you a lot of built in methods, and you can add your own if you want.</p>
+</section>
+<section id="security">
+	<div class="page-header"><h3>Security</h3><hr class="notop"></div>
+<h4 id="security_sql_injection">SQL Injection</h4>
+<p>
+	Advanced Security System has own database class that extends&nbsp;<strong>PDO</strong>&nbsp;and use prepared statements to prevent SQL Injection attacks.</p>
+<h4 id="security_session_security">Session Security</h4>
+<p>
+	Your session cookies are very important while you are logged in. If someone still you a session cookie, he can log in and do whatever he wants, <strong>logged in like you!</strong></p>
+<p>
+	Advanced Security creates secure, HTTP only cookies, whitch can&#39;t be accessed via JavaScript and session Id will be regenerated every time (if you selected that option during installation process).</p>
+<p>
+	Also, there is an option to enable &quot;login fingerprint&quot;. This basically means that every time you log in. hash of your IP address and name of browser you are using are stored inside $_SESSION variable, and if someone somehow steal your session cookie, this will protect you.</p>
+<p>
+	CSRF protection is also included. That means that forms can only be submited from your website, so you don&#39;t have to worry if someone will spam your website or perform some malicios actons.</p>
+<h4 id="security_password_encryption">Password Encryption</h4>
+<p>
+	Password encryption is, of course, very important factor.&nbsp;</p>
+<p>
+	Advanced Security System encrypts your password&nbsp;<strong>twice</strong>.</p>
+<p>
+	Password is encrypted on <strong>client side using Javascript</strong> before it is event sent through the network, so you don&#39;t have to worry if you don&#39;t have&nbsp;<strong>HTTPS&nbsp;</strong>(but, to improve your security, it&#39;s recommended that you get HTTPS).</p>
+<p>
+	Password is <strong>encrypted on server side </strong>with encryption method you have selected during the installation process.&nbsp;</p>
+<p>
+	Available encryption methods are Bcrypt with selected cost (using salt of course) and SHA-512 with salt and thousands of iterations.&nbsp;</p>
+<p>
+	Salt is random generated string during the registration process.</p>
+<h4 id="security_brute_force_attack">Brute Force Attack</h4>
+<p>
+	System prevents brute force attacks too by blocking user IP address for one day, if there are specific number of invalid login attempts. You can set number of login attempts during installation wizard.</p>
+</section>
+<section id="installation">
+	<div class="page-header"><h3>Installation</h3><hr class="notop"></div>
+<h4 id="installation_extract_and_upload_downloaded_zip_file">Extract and upload downloaded zip file</h4>
+<div>
+	When you download zip file with source code, first thing you need to do is to extract it and upload extracted content to your web server using FTP or web uploader.</div>
+<div>
+	&nbsp;</div>
+<h4 id="installation_create_database">Create database</h4>
+<div>
+	Now you need to create database where you want to Advanced Security Installation Wizard to create necessary tables.</div>
+<div>
+	&nbsp;</div>
+<div class="alert alert-info">
+	<strong>NOTE</strong>: If you already have database created for your website, you don&#39;t need to create new database. Installation wizard will create all database tables prefixed with <strong>as_</strong></div>
+<div>
+	&nbsp;</div>
+<div class="alert alert-info">
+	<strong>NOTE</strong>: All tables that will be created by the installation wizard use <strong>utf8 </strong>encoding and&nbsp;<strong>utf8_unicode_ci </strong>collation. You will have to set your database to use&nbsp;<strong>utf8_unicode_ci&nbsp;</strong>collation, so it can work properly. &nbsp;However, if you are not going to use utf caracter set, you can skip this.</div>
+<h4 id="installation_start_installation_wizard">Start installation wizard</h4>
+<div>
+	Everything is prepared now, you can start installation wizard by accessing <strong>install.php or index.php</strong>&nbsp;file inside install folder.&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	Example: If your domain is <strong>www.example.com</strong>, and you have uploaded Advanced Security files into <strong>root directory</strong>, you can start installation wizzard by accessing <strong>www.example.com/install/install.php or&nbsp;</strong>&nbsp;<strong>www.example.com/install/index.php&nbsp;</strong></div>
+<div>
+	&nbsp;</div>
+<div class="alert alert-info">
+	<strong>NOTE:&nbsp;</strong>Make sure you have set permission for ASEngine folder to&nbsp;<strong>777</strong> before you proceed. That&#39;s because wizard will create configuration file inside that directory.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Now you need to follow installation wizard and customize Advanced Security installation. Here is an WAMP instalation example for this version:</div>
+<div>
+	&nbsp;</div>
+<p>
+	<iframe frameborder="0" height="396" src="http://www.screenr.com/embed/ddgN" width="650"></iframe></p>
+<p>
+	&nbsp;</p>
+<div>
+	Once it is installed, all required database tables and configuration files are automatically created. You don&#39;t have to edit any PHP file in order to configure it.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Also,<strong>&nbsp;an admin account is automatically created</strong>&nbsp;with username&nbsp;<strong>admin&nbsp;</strong>and password&nbsp;<strong>admin123</strong>.</div>
+<div>
+	&nbsp;</div>
+</section>
+<section id="logging_in">
+	<div class="page-header"><h3>Logging In</h3><hr class="notop"></div>
+<p>
+	Right after installation, you are available to log in as administrator:</p>
+<p style="margin-left: 40px;">
+	username:&nbsp;<strong>admin</strong></p>
+<p style="margin-left: 40px;">
+	password:&nbsp;<strong>admin123</strong></p>
+<p>
+	Of course, every registred user can login after successful registration.</p>
+<p>
+	<img alt="" src="images/login.jpg"></p>
+<p>
+	During registration process you are available to select the page where user will be redirected after successfull login. By default it is set to&nbsp;<strong>index.php</strong>. You can update this setting inside configuration file by changing the value of&nbsp;<strong>SUCCESS_LOGIN_REDIRECT&nbsp;</strong>constant.</p>
+</section>
+<section id="registration">
+	<div class="page-header"><h3>Registration</h3><hr class="notop"></div>
+<p>
+	Users can register on your system by clicking on &quot;Create Account&quot; tab and fill the registration form.</p>
+<p>
+	<img alt="" src="images/register1.jpg"></p>
+<p>
+	&nbsp;If there are some errors, or email/username is already in use, user will get appropriate messages.</p>
+<p>
+	<img alt="" src="images/register2.jpg"></p>
+<p>
+	During installation process, you are available to select&nbsp;whether the user will be automatically confirmed or he will receive confirmation email in order to confirm that his email is valid. Of course, you can update this setting inside&nbsp;configuration file (ASEngine/ASConfig.php) that is created after successfull registration by updating value of <strong>MAIL_CONFIRMATION_REQUIRED&nbsp;</strong>constant.</p>
+</section>
+<section id="password_reset">
+	<div class="page-header"><h3>Password Reset</h3><hr class="notop"></div>
+<p>
+	If you have forgot your password, just select &quot;Forgot password?&quot; tab and enter your email address.</p>
+<p>
+	<img alt="" src="images/passres.png"></p>
+<p>
+	The system will send you password reset email which contain password reset link.&nbsp;</p>
+<p>
+	If you click on that link, you will get to password reset page</p>
+<p>
+	<img alt="" src="images/passres1.png"></p>
+<p>
+	Enter new password and click &quot;Reset Password&quot;</p>
+<p>
+	<img alt="" src="images/passres2.png"></p>
+<p>
+	Now you can go to login page and log in with new password.</p>
+</section>
+<section id="social_login">
+	<div class="page-header"><h3>Social Login</h3><hr class="notop"></div>
+<p>
+	If you want, you can enable social login for your users.</p>
+<p>
+	<img alt="" src="images/social_login.png"></p>
+<p>
+	During installation wizard you will be prompted to enable/disable specific provider (options are twitter, facebook and google+).&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	For every provider you will have to provide additional infomation. Also, if you want, for example, to make facebook login active, you will have to create an fb app by accessing&nbsp;https://developers.facebook.com/ and then create new App that will be used for your application.</p>
+<p>
+	The procedure is the same for Twitter and Google+, just link for developer website is different.</p>
+<p>
+	After you create that app on Facebook (or Google or Twitter), you will get access to app key and app secret key. Those fields are required in order to make social login to work, and you will be prompted to insert those fields during installation process, if enable some of social login providers.</p>
+<p>
+	Of course, those values can be updated later by editing config file generated by installation wizard.</p>
+<div class="alert alert-info">
+	<strong>NOTE: </strong>When&nbsp;user first time authenticate with the system via social network, his account &nbsp;is automatically created and stored in database. If in future he tries to login via some some of the other social network options, the system will check if his email exist in database and, <strong>if it does, it will be associated with existing account! If it doesn&#39;t, new account will be created.&nbsp;</strong></div>
+<div class="alert alert-info">
+	<strong>NOTE:&nbsp;</strong>Twitter&nbsp;api for authentication doesn&#39;t provide users email address! So, if you email address is strictly required for all users, consider disabling twitter login option.</div>
+<h5 class="alert alert-info">
+	&nbsp;</h5>
+</section>
+<section id="post_comments">
+	<div class="page-header"><h3>Post Comments</h3><hr class="notop"></div>
+<p>
+	Posting comments is actually an demonstration how Advanced Security System can be used in some real situations.</p>
+<p>
+	If your user role is set to <strong>user&nbsp;</strong>(this is default value when new user successfully complete registration process), you won&#39;t be available to post comments.</p>
+<p>
+	<img alt="" src="images/comments.png"></p>
+<p>
+	If your user role is set to&nbsp;<strong>editor </strong>or you are <b>adminstrator</b>, you are available to post comments by entering comment text and clicking comment button.</p>
+<p>
+	<img alt="" src="images/comments1.png"></p>
+<p>
+	<img alt="" src="images/comments2.png"></p>
+</section>
+<section id="change_password">
+	<div class="page-header"><h3>Change Password</h3><hr class="notop"></div>
+<p>
+	When you are logged in, you are available to change your password.</p>
+<p>
+	You can do this by clicking on&nbsp;<strong>My Profile</strong> in navigation menu to the left.</p>
+<p>
+	In order to update your password, you need to enter your old password and then enter new password &nbsp;twice</p>
+<p>
+	<img alt="" src="images/updatepassword.png"></p>
+<p>
+	Now click&nbsp;<strong>Update</strong> button to update your password.</p>
+<div class="alert alert-info">
+	<strong>NOTE:&nbsp;</strong>If you want to change your username or email address, you need to contact administrator.</div>
+</section>
+<section id="update_details">
+	<div class="page-header"><h3>Update Details</h3><hr class="notop"></div>
+<p>
+	In order to update your password, go to&nbsp;<strong>My Profile</strong> page, enter details you want to update, and click&nbsp;<strong>Update&nbsp;</strong>button.</p>
+<p>
+	<img alt="" src="images/updatedetails.png"></p>
+</section>
+<section id="user_management">
+	<div class="page-header"><h3>User Management</h3><hr class="notop"></div>
+<p>
+	If you are logged in as Administrator, you are available to manage registred website users.</p>
+<p>
+	To do this, go to&nbsp;<strong>Users</strong>&nbsp;page.</p>
+<p>
+	There are 3 type of users( 3 different user roles) <strong>by default</strong>:</p>
+<ul>
+	<li>
+		Admin</li>
+	<li>
+		Editor</li>
+	<li>
+		User</li>
+</ul>
+<p>
+	For every user displayed in user table, there is one blue button in&nbsp;<strong>Action</strong> column. Depending on user&#39;s role, text on blue button can be&nbsp;<strong>User, Editor </strong>or any new role added by admin. Admin users won&#39;t be displayed there since <strong>there can be only one admin.</strong></p>
+<p>
+	<strong><img alt="" src="images/usermanagement.png"></strong></p>
+<h4 id="user_management_strongadding_new_user_strong"><strong>Adding New User</strong></h4>
+<p>
+	As administrator, you can add new users manually. To do that, just click &quot;Add User&quot; button located above users table and fill required info.</p>
+<p>
+	<strong><img alt="" src="images/usermanagement1.png"></strong></p>
+<h4 id="user_management_editing_user_details">Editing User Details</h4>
+<p>
+	You can edit existing users buy clicing small caret to the right of the blue button and select &quot;Edit&quot;.</p>
+<p>
+	<strong><img alt="" src="images/usermanagement2.png"></strong></p>
+<p>
+	<strong><img alt="" src="images/usermanagement3.png"></strong></p>
+<h4 id="user_management_display_user_details">Display User Details</h4>
+<p>
+	If you want only to view user details, without editing them, you can get all details for every registred user by clicking small caret to the right of the blue button, and selecting&nbsp;<strong>Details&nbsp;</strong>option from dropdown menu.</p>
+<p>
+	<img alt="" src="images/usermanagement4.png"></p>
+<h4 id="user_management_ban_user">Ban User</h4>
+<p>
+	If you want to keep user in database but make his account unfunctional, you can simply&nbsp;<strong>ban&nbsp;</strong>that user by selecting&nbsp;<strong>Ban</strong> option from dropdown menu. All banned users have their button inside Action column painted in red.</p>
+<p>
+	<img alt="" src="images/usermanagement6.png"></p>
+<p>
+	&nbsp;</p>
+<h4 id="user_management_delete_user">Delete User</h4>
+<p>
+	You can delete specific user by clicking small caret to the right of the blue button, and selecting&nbsp;<strong>Delete&nbsp;</strong>option from dropdown menu.</p>
+<p>
+	<img alt="" src="images/usermanagement5.png"></p>
+<h4 id="user_management_change_user_role">Change User Role</h4>
+<p>
+	User role can be changed to any available user role (default or added user roles)</p>
+<p>
+	You can change user&#39;s role by clicking&nbsp;<span style="font-size: 12px;">small caret to the right of the blue button, and selecting <b>Change User Role.</b></span></p>
+<p>
+	<img alt="" src="images/changerole1.png"></p>
+<p>
+	After that, just select user role from dropdown list and click&nbsp;<strong>Ok.</strong></p>
+<p>
+	<img alt="" src="images/changerole2.png"></p>
+<h4 id="user_management_searching_and_sorting_users">Searching and Sorting Users</h4>
+<p>
+	You can search through all users by typing words inside search box located above userse table. Users will be automatically filtered and displayed.&nbsp;</p>
+<p>
+	You are available to sort all columns of users table by clicking to column header and to paginete through table records using pagination located below users table.</p>
+<h4 id="user_management_add_delete_user_roles">Add/Delete User Roles</h4>
+<p>
+	If you want to manage user roles, just select <b>User Roles</b> from navigation menu.</p>
+<p>
+	To add new role, simply enter new role name and click&nbsp;<strong>Add.&nbsp;</strong>New role will be automatically added.&nbsp;</p>
+<p>
+	It&#39;s recommended to use <strong>one word role&nbsp;</strong>because it will be easiery for you to check user role in code.</p>
+<p>
+	However, every role name <strong>will be converted to lower case</strong>.</p>
+<p>
+	<strong><img alt="" src="images/role.png"></strong></p>
+<p>
+	To delete role, just click delete button next to user role you want to delete.</p>
+<p>
+	<strong><img alt="" src="images/role1.png"></strong></p>
+<p>
+	If there are users that already have this user role, they will be returned back to&nbsp;<strong>User</strong> role.</p>
+<div class="alert alert-info">
+	<strong>NOTE:&nbsp;</strong>This script fully support cyrillic and any other letters since it is using utf8 for storing data in database. This means that you can create users that will have&nbsp;cyrillic usernames, first and last name, address etc. Just make sure that your database collation is set to <strong>utf8_unicode_ci</strong>.</div>
+<p>
+	&nbsp;</p>
+</section>
+<section id="language">
+	<div class="page-header"><h3>Language</h3><hr class="notop"></div>
+<p>
+	You are available to change user interface language by clicking flag icons located in top right corner (login/register page) and inside right header area (any other page).</p>
+<p>
+	<img alt="" src="images/lang.png"></p>
+<p>
+	<img alt="" src="images/lang1.png"></p>
+<p>
+	<img alt="" src="images/lang2.png"></p>
+<p>
+	By default, there are two languages available: English and Serbian (cyrillic).</p>
+<p>
+	By chaning interface language, all error messages and validation are translated too.&nbsp;</p>
+<h4 id="language_adding_new_language">Adding New Language</h4>
+<p>
+	If you want to add new language, all you need to do is to make copy of existing language file (en.php for example) located inside Lang directory, &nbsp;rename it to ru.php for example, and translate it. Of course, since this translation file is organized as php array, you only translate those values to the right of &nbsp;&nbsp;<strong>=&gt; &nbsp;&nbsp;</strong>sign.</p>
+<p>
+	Next step you need to do is to add new flag (or organize it however you want), and create an link that will point to&nbsp;<strong>?lang=ru,&nbsp;</strong>and that&#39;s it.&nbsp;<img alt="smiley" height="20" src="assets/images/image_1.gif" title="smiley" width="20"></p>
+<p>
+	Example:</p>
+<pre class="prettyprint lang-html linenums">
+&lt;a href=&quot;?lang=ru&quot;&gt;Russian&lt;/a&gt;</pre>
+</section>
+<section id="additional_configuration">
+	<div class="page-header"><h3>Additional Configuration</h3><hr class="notop"></div>
+<p>
+	During the installation process, Installation Wizard automatically creates configuration file&nbsp;called&nbsp;<strong>ASConfig.php</strong> and store it into&nbsp;<strong>ASEngine</strong> folder.</p>
+<p>
+	If you want to configure it manually after installation, you can do it by editing <strong>ASConfig.php</strong>.</p>
+<h4 id="additional_configuration_updating_validation_messages">Updating Validation Messages</h4>
+<p>
+	All validation messages are inside language files. So, if you want to update validation messages for english language, you need to edit&nbsp;<strong>Lang/eng.php</strong> file and update validation message that are located in&nbsp;<strong>&#39;// validation messages&#39;&nbsp;</strong>section.&nbsp;</p>
+<h4 id="additional_configuration_changing_bootstrap_version">Changing Bootstrap Version</h4>
+<p>
+	If you want to change Bootstrap version after installation, you can do it by editing <strong>ASConfig.php&nbsp;</strong>and changing following line</p>
+<pre class="prettyprint lang-php linenums">
+define(&#39;BOOTSTRAP_VERSION&#39;, your_bootstrap_version_here);</pre>
+<p>
+	So, for Bootstrap 2.3.2, it will be</p>
+<pre class="prettyprint lang-php linenums">
+define(&#39;BOOTSTRAP_VERSION&#39;, 2);</pre>
+<p>
+	and for Bootstrap 3</p>
+<pre class="prettyprint lang-php linenums">
+define(&#39;BOOTSTRAP_VERSION&#39;, 3);</pre>
+<h4 id="additional_configuration_changing_default_interface_language">Changing Default Interface Language</h4>
+<p>
+	By default, if you have never changed/updated interface language, it is set to english. However, you can change that in&nbsp;<strong>ASConfig.php</strong>&nbsp;by updating&nbsp;<strong>DEFAULT_LANGUAGE </strong>constant.</p>
+<p>
+	So, if you want to set default language to&nbsp;Serbian (cyrillic), you need to update this constant to&nbsp;<strong>rs:</strong></p>
+<pre class="prettyprint lang-php linenums">
+define(&#39;DEFAULT_LANGUAGE&#39;, &#39;rs&#39;);&nbsp;</pre>
+<div class="alert alert-info">
+	<strong>NOTE:&nbsp;</strong>Value of this constant should correspond to the file name of language file (in this case file is named&nbsp;<strong>rs.php</strong>)</div>
+</section>
+<section id="using_the_engine">
+	<div class="page-header"><h3>Using The Engine</h3><hr class="notop"></div>
+<p>
+	If you want to create new files for your website, and I&#39;m sure you will, or to allow some old website pages to be accessible&nbsp;only by registred users, you need to add those two lines of code:</p>
+<pre class="prettyprint lang-php linenums">
+include &quot;ASEngine/AS.php&quot;;
+if(!$login-&gt;isLoggedIn()) header(&quot;Location: login.php&quot;);</pre>
+<p>
+	&nbsp;</p>
+<p>
+	<strong>Explanation:</strong></p>
+<p>
+	File <b>AS.php&nbsp;</b>includes all required classes, starts new session and creates 3 new objects as follows</p>
+<pre class="prettyprint lang-php linenums">
+$login    = new ASLogin();
+$register = new ASRegister();
+$mailer   = new ASEmail();</pre>
+<p>
+	Those objects now can be used on every page where <strong>AS.php</strong> is included.</p>
+<p>
+	&nbsp;</p>
+<p>
+	This line of code says: &quot;If user is not logged in, redirect him to login page.&quot;</p>
+<pre class="prettyprint lang-php linenums">
+if(!$login-&gt;isLoggedIn()) header(&quot;Location: login.php&quot;);</pre>
+</section>
+<section id="session">
+	<div class="page-header"><h3>Session</h3><hr class="notop"></div>
+<div>
+	By including&nbsp;<strong>AS.php&nbsp;</strong>your session will be automatically started. However, if you want to do it by your self, you need to call <b>startSession()&nbsp;</b>method from&nbsp;<strong>ASSession class</strong>.</div>
+<pre class="prettyprint lang-php linenums">
+ASSession::startSession();</pre>
+<div class="alert alert-error">
+	Always start session using this function because it will start secure session!</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	If you want to destroy existing session, just call&nbsp;<strong>destroySession()&nbsp;</strong>method:</div>
+<pre class="prettyprint lang-php linenums">
+ASSession:destroySession();</pre>
+<div>
+	&nbsp;</div>
+<div>
+	In order to store somethind inside $_SESSION, you can use&nbsp;<strong>set &nbsp;</strong>method</div>
+<pre class="prettyprint lang-php linenums">
+ASSession::set(&quot;something&quot;, 5);</pre>
+<div>
+	&nbsp;</div>
+<div>
+	And if you want to get something from $_SESSION, for example user ID, call&nbsp;<strong>get</strong> method</div>
+<pre class="prettyprint lang-php linenums">
+$userId = ASSession::get(&quot;user_id&quot;);</pre>
+<p>
+	If you want to unset some session item, you can do it by calling&nbsp;<strong>destroy</strong>&nbsp;method</p>
+<pre class="prettyprint lang-php linenums">
+ASSession::destroy(&#39;someething_that_is_set_before&#39;);</pre>
+</section>
+<section id="working_with_asuser_class">
+	<div class="page-header"><h3>Working With ASUser Class</h3><hr class="notop"></div>
+<p>
+	If user is logged in, his ID is stored inside $_SESSION.</p>
+<p>
+	You can get it on standard way:</p>
+<pre class="prettyprint lang-php linenums">
+$userId = $_SESSION[&#39;user_id&#39;];</pre>
+<p>
+	or you can use <strong>ASSession class&nbsp;</strong>(recommanded)</p>
+<pre class="prettyprint lang-php linenums">
+$userId = ASSession::get(&#39;user_id&#39;);</pre>
+<p>
+	Now, when we have user ID, we can do whatever we want with our user.</p>
+<h3>
+	Create User Object</h3>
+<p>
+	Simply create new ASUser object and pass $userId as constructor parameter.</p>
+<pre class="prettyprint lang-php linenums">
+$user = new ASUser($userId);</pre>
+<h3>
+	Check If User Is Administrator</h3>
+<p>
+	If you want to check if user is administrator, just call&nbsp;<strong>isAdmin()&nbsp;</strong>function on user object</p>
+<pre class="prettyprint lang-php linenums">
+if($user-&gt;isAdmin())
+   echo &quot;This user is administrator!&quot;;
+else 
+   echo &quot;This user is not administrator!&quot;;</pre>
+<h3>
+	Get User&#39;s Role</h3>
+<pre class="prettyprint lang-php linenums">
+$user-&gt;getRole();</pre>
+<p>
+	So, if we want to allow only to Administrator and Ediitor to post comments, we need to add this (used inside index.php):</p>
+<pre class="prettyprint lang-html linenums">
+&lt;?php if($user-&gt;getRole() != &#39;user&#39;): ?&gt;
+      &lt;div class=&quot;leave-comment&quot;&gt;
+            &lt;div class=&quot;control-group&quot;&gt;
+                &lt;h5&gt;Leave comment&lt;/h5&gt;
+                &lt;div class=&quot;controls&quot;&gt;
+                    &lt;textarea id=&quot;comment-text&quot;&gt;&lt;/textarea&gt;
+                    &lt;button class=&quot;btn btn-success&quot; id=&quot;comment&quot;&gt;Comment&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+      &lt;/div&gt;
+&lt;?php else: ?&gt;
+      &lt;p&gt;You can&#39;t post comments here until admin change your role.&lt;/p&gt;
+&lt;?php endif; ?&gt;</pre>
+<h3>
+	Get User Info</h3>
+<pre class="prettyprint lang-php linenums">
+$userInfo = $user-&gt;getInfo();</pre>
+<p>
+	$userInfo will be array containing following informations:</p>
+<pre class="prettyprint lang-php linenums">
+$user_id            = $userInfo[&#39;user_id&#39;];
+$email              = $userInfo[&#39;email&#39;];
+$username           = $userInfo[&#39;username&#39;];
+$password           = $userInfo[&#39;password&#39;]
+$confirmation_key   = $userInfo[&#39;confirmation_key&#39;];
+$confirmed          = $userInfo[&#39;confirmed&#39;];
+$password_reset_key = $userInfo[&#39;password_reset_key&#39;];
+$register_date      = $userInfo[&#39;register_date&#39;];
+$user_role          = $userInfo[&#39;user_role&#39;];
+$last_login         = $userInfo[&#39;last_login&#39;];</pre>
+<h3>
+	Update User Info</h3>
+<p>
+	You can update every user&#39;s information by passing it as an array item to&nbsp;<strong>updateInfo&nbsp;</strong>method.</p>
+<p>
+	So, if you want to update user_role and email, you will do this:</p>
+<pre class="prettyprint lang-php linenums">
+$user-&gt;updateInfo(array(
+        &quot;user_role&quot; =&gt; $newPassword,
+        &quot;email&quot;<span class="Apple-tab-span" style="white-space:pre"> </span>    =&gt; $newEmail
+));</pre>
+<p>
+	And if you want to update&nbsp;<strong>last_login, username&nbsp;</strong>and <b>confirmation_key</b>, you will just put it inside an array, and pass it to&nbsp;<strong>updateInfo&nbsp;</strong>function, like this</p>
+<pre class="prettyprint lang-php linenums">
+$user-&gt;updateInfo(array(
+        &quot;last_login&quot;       =&gt; $newLastLoginValue,
+        &quot;username&quot;<span class="Apple-tab-span"> </span>        =&gt; $newUsername,
+        &quot;confirmation_key&quot; =&gt; $newConfirmationKey
+));
+</pre>
+<h3>
+	Get User Details</h3>
+<pre class="prettyprint lang-php linenums">
+$userDetails = $user-&gt;getDetails()</pre>
+<p>
+	$userDetails will be an array with following fields:</p>
+<pre class="prettyprint lang-php linenums">
+$first_name = $userDetails[&#39;first_name&#39;];
+$last_name  = $userDetails[&#39;last_name&#39;];
+$address    = $userDetails[&#39;address&#39;];
+$phone      = $userDetails[&#39;phone&#39;];</pre>
+<h3>
+	Update User Details</h3>
+<p>
+	Updating user details works the same as updating user info.</p>
+<p>
+	So, if you want to update <strong>address </strong>and <strong>phone</strong></p>
+<pre class="prettyprint lang-php linenums">
+$user-&gt;updateDetails(array(
+     &quot;address&quot; =&gt; $newAddress,
+     &quot;phone&quot;<span class="Apple-tab-span" style="white-space:pre"> </span>  =&gt; $newPhone
+));</pre>
+<div class="alert alert-info">
+	<strong>NOTE:&nbsp;</strong>Those are only most important functions from ASUser class. All functions are fully covered with comments, and it is very easy to understand what all those functions do.</div>
+</section>
+<section id="database_queries">
+	<div class="page-header"><h3>Database Queries</h3><hr class="notop"></div>
+<div class="alert alert-info">
+	<strong>NOTE:</strong> You don&#39;t have to use those functions. Since this classe extends PDO, you can use native PDO functions.</div>
+<div>
+	&nbsp;</div>
+<h4 id="database_queries_creating_database_connection">Creating Database Connection</h4>
+<pre class="prettyprint lang-php linenums">
+$db = ASDatabase::getInstance();</pre>
+<p>
+	By calling&nbsp;<strong>getInstance()</strong> method, you will ensure that there is only one instance of ASDatabase created which means that there is only one database connection opened.</p>
+<div>
+	&nbsp;</div>
+<h4 id="database_queries_select">SELECT</h4>
+<p>
+	Just write regular SQL query and use parameters insted of variables (<strong>:id&nbsp;</strong>is parameter in this case). Second method parameter is bind array. This is an array where key represent name of SQL query parameter (<strong>id&nbsp;</strong>in this case, without &quot;<strong>:</strong>&quot;) and value for that key should be value you want to replace that parameter inside SQL query:</p>
+<div>
+	<pre class="prettyprint lang-php linenums">
+$result = $db-&gt;select(
+             &quot;SELECT * FROM `as_user_details` WHERE `user_id` = :id&quot;,
+              array (&quot;id&quot; =&gt; $userId)
+          );</pre>
+	<div>
+		If you don&#39;t have any parameter inside SQL query, just don&#39;t pass anything as second method parameter, as follows</div>
+	<pre class="prettyprint lang-php linenums">
+$result = $db-&gt;select(&quot;SELECT * FROM `as_users`&quot;);</pre>
+	<div>
+		&nbsp;</div>
+	<div>
+		Result will always be an <strong>array</strong>. &nbsp;</div>
+	<div>
+		If result should be only one database row or only one database column, you can access it like this:</div>
+	<pre class="prettyprint lang-php linenums">
+//result of first query
+$userDetails = $result[0];</pre>
+	<div>
+		If there will be muliple rows, you can iterate through them with simple <strong>foreach</strong>:</div>
+	<pre class="prettyprint lang-php linenums">
+foreach($result as $user) {<span style="font-family: Arial, Verdana, sans-serif;">    </span><span class="Apple-tab-span" style="font-family: Arial, Verdana, sans-serif;"> 
+</span><span style="font-family: Arial, Verdana, sans-serif;">     echo $user[&#39;email&#39;];</span><span style="font-family: Arial, Verdana, sans-serif;">    </span><span class="Apple-tab-span" style="font-family: Arial, Verdana, sans-serif;"> 
+</span><span style="font-family: Arial, Verdana, sans-serif;">     echo $user[&#39;username&#39;];</span><span style="font-family: Arial, Verdana, sans-serif;">    </span><span class="Apple-tab-span" style="font-family: Arial, Verdana, sans-serif;"> 
+</span><span style="font-family: Arial, Verdana, sans-serif;">}</span></pre>
+</div>
+<div>
+	&nbsp;</div>
+<h4 id="database_queries_insert_nbsp_nbspspan_class"apple_tab_span"_style"white_spacepre"_span">INSERT &nbsp; &nbsp;<span class="Apple-tab-span" style="white-space:pre"> </span></h4>
+<p>
+	In order to insert something into database,&nbsp;<strong>insert&nbsp;</strong>method need 2 parameters.&nbsp;</p>
+<p>
+	First parameter is <strong>table name&nbsp;</strong>and second one is <strong>array</strong> where keys represent names of database columns, and values represent what should be written into that database column.</p>
+<p>
+	So, if you want to insert new user into your database, you need to write this:&nbsp;</p>
+<pre class="prettyprint lang-php linenums">
+$db-&gt;insert(&#39;as_users&#39;, array(
+         &quot;email&quot;     =&gt; $email,
+         &quot;username&quot;  =&gt; $username,
+         &quot;password&quot;  =&gt; $password,
+         &quot;confirmation_key&quot;  =&gt; $key,
+         &quot;register_date&quot;     =&gt; $date     
+     ));</pre>
+<h4 id="database_queries_update_nbsp_nbsp_nbsp_nbsp_nbsp_nbsp_nbsp">UPDATE&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</h4>
+<p>
+	Update method needs 4 parameters.</p>
+<p>
+	First one is&nbsp;<strong>database table</strong>&nbsp;that should be updated.</p>
+<p>
+	Second one is&nbsp;<strong>array</strong> where keys are names of columns that should be updated and values are new values for that column.</p>
+<p>
+	Third parameter is <strong>SQL WHERE&nbsp;</strong>query part. Remember that you need to <strong>use sql parameters</strong> for every variable that you want to pass to the query to prevent <strong>SQL Injection.</strong></p>
+<p>
+	And fourth parameter is bind array with key =&gt; value pair for every sql parameter you have added into sql query.</p>
+<p>
+	So, if you want to update user&#39;s password, and you have&nbsp;<strong>$userId</strong> for that user, you can do it like this:</p>
+<pre class="prettyprint lang-php linenums">
+$db-&gt;update(
+    <span class="Apple-tab-span" style="white-space:pre"> </span>&#39;as_users&#39;,
+     <span style="font-family: Arial, Verdana, sans-serif;">array ( </span>&quot;password&quot; =&gt; $newPassword ),
+    <span class="Apple-tab-span" style="white-space:pre"> </span>&quot;user_id = :id&quot;,
+    <span class="Apple-tab-span" style="white-space:pre"> </span>array( &quot;id&quot; =&gt; $user_id )
+);</pre>
+<div>
+	This is actually converted to</div>
+<pre class="prettyprint lang-php linenums">
+&quot;UPDATE `as_users` SET `password` = &#39;$newPassword&#39; WHERE `user_id` = &#39;$user_id&#39;&quot;</pre>
+<div>
+	&nbsp;but we use PDO prepared statements to<strong> prevent SQL injection</strong>.</div>
+<div>
+	&nbsp; &nbsp; &nbsp; &nbsp;</div>
+<h4 id="database_queries_delete">DELETE</h4>
+<p>
+	In order to delete something from database, you need to pass 3 parameters to&nbsp;<strong>delete method</strong>.</p>
+<p>
+	First one is&nbsp;<strong>database table name</strong> from which you want to delete.</p>
+<p>
+	Second is <strong>SQL WHERE&nbsp;</strong>query part, using parameters.</p>
+<p>
+	And third is an array with key =&gt; value pair for every sql parameter inside your WHERE query part.</p>
+<p>
+	So, if you want to delete all comments posted by user with specific <strong>$userId</strong>, you need to do the following</p>
+<pre class="prettyprint lang-php linenums">
+$this-&gt;delete(
+      &quot;as_comments&quot;,
+      &quot;posted_by = :id&quot;, 
+      array( &quot;id&quot; =&gt; $userId )
+);</pre>
+</section>
+<section id="working_with_comments">
+	<div class="page-header"><h3>Working With Comments</h3><hr class="notop"></div>
+<p>
+	If you want to work with <strong>ASComments class</strong>, first you need to create new object of that class</p>
+<pre class="prettyprint lang-php linenums">
+$comment = new ASComment();</pre>
+<h4 id="working_with_comments_adding_new_comment">Adding New Comment</h4>
+<p>
+	To insert new comment into database, you need <strong>$userId&nbsp;</strong>of user who is posting the comment and&nbsp;<strong>comment text</strong>.</p>
+<p>
+	Usually logged user is posting the comment (unless you want to make it different) and his user Id can be found inside $_SESSION variable.</p>
+<p>
+	To insert new comment, just call&nbsp;<strong>insertComment</strong> method and pass two mentioned parameters</p>
+<pre class="prettyprint lang-php linenums">
+$comment-&gt;insertComment($userId, $commentText);</pre>
+<h4 id="working_with_comments_get_user_39s_comments">Get User&#39;s Comments</h4>
+<div>
+	If you want to get all comments from specific user, you need to do the following</div>
+<pre class="prettyprint lang-php linenums">
+$comment-&gt;getUserComments($userId);</pre>
+<h4 id="working_with_comments_get_last_x_comments">Get Last X Comments</h4>
+<div>
+	To get last <strong>X&nbsp;</strong>comments from database, just call&nbsp;<strong>getComments</strong> method and pass&nbsp;<strong>number of comments</strong>&nbsp;as parameter.</div>
+<div>
+	If you call&nbsp;<strong>getComments&nbsp;</strong>without parameters, you will get last 7 commets from database</div>
+<pre class="prettyprint lang-php linenums">
+$comment-&gt;getComments();   //returns last 7 comments
+$comment-&gt;getComments(20); //returns last 20 comments</pre>
+</section>
+<section id="assets">
+	<div class="page-header"><h3>Assets</h3><hr class="notop"></div>
+<p>
+	Assets and classes used in this project:</p>
+<ul>
+	<li>
+		DataTables -&nbsp;https://datatables.net/</li>
+	<li>
+		HybridAuth -&nbsp;http://hybridauth.sourceforge.net/</li>
+	<li>
+		PHPMailer -&nbsp;http://phpmailer.worxware.com/</li>
+</ul>
+</section>
+<section id="changelog">
+	<div class="page-header"><h3>Changelog</h3><hr class="notop"></div>
+<h4 id="changelog_version_20">Version 2.0</h4>
+<pre class="prettyprint lang-plain linenums">
+Added social login via Facebook, Twitter and Google+
+
+Administrator can now add new user or edit existing users.
+
+Added search for users table
+
+Added pagination for users table
+
+Added unicode support
+
+Added option for updating system language
+
+ASDatabase class now implement Singleton design pattern
+
+Added option for changing how emails will be sent (php mail or SMTP)
+
+Added option to select redirect page after user log in
+
+Added option to set life time for password reset token
+
+Added option to select if user should confirm his email after registration or not
+
+Added option to ban specific user
+
+All bugs fixed from previous versions</pre>
+<h4 id="changelog_version_13">Version 1.3</h4>
+<pre class="prettyprint lang-plain linenums">
+CSRF protection included</pre>
+<h4 id="changelog_version_12">Version 1.2</h4>
+<pre class="prettyprint lang-plain linenums">
+Admin is now available to add more user roles</pre>
+<h4 id="changelog_version_11">Version 1.1</h4>
+<pre class="prettyprint lang-plain linenums">
+Added option for selecting password encryption algorithm
+
+Added option for selecting version of Twitter Bootstrap
+
+Added loading state on Update Password button
+
+Added loading state on Update Details button</pre>
+</section>
+
+	</div>
+</body>
+</html>

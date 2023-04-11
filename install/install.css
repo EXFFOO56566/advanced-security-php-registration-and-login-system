@@ -1,0 +1,94 @@
+.wizard-card { 
+    height: 450px !important; 
+    /*overflow-y: hidden;*/
+}
+.wizard-nav-container { 
+    height: 520px !important; 
+}
+.wizard-steps { 
+    height: 575px !important; 
+}
+.help-block {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 12px;
+    margin-top: -8px;
+    font-style: italic;
+}
+.wizard-card > h3 {
+    margin-bottom: 10px;
+    margin-top: -15px;
+}
+.btn-group {
+    margin-bottom: 10px;
+}
+.btn-group button {
+    width: 130px;
+}
+label { 
+    font-weight: bold;
+}
+#max_login_attempts { 
+    text-align: center; 
+}
+#salt { 
+    width: 335px; 
+}
+.help-block { 
+    text-align: justify; 
+    margin-bottom: 15px; 
+}
+.alert { 
+    display: inline-block; 
+    padding: 5px;
+    margin-bottom: 0px;
+    float: left;
+    margin-left: 35px;
+}
+.alert p { 
+    margin: 0; 
+}
+.welcome-screen p {
+    font-size: 16px;
+    text-align: justify;
+    line-height: 25px;
+}
+body { 
+    line-height: 15px; 
+}
+
+
+.radio {
+    font-weight: bold;
+    margin-top: 0px !important;
+}
+
+.password-encription .alert {
+    padding: 10px !important;
+    margin-left: 0px !important;
+    margin-bottom: 10px !important;
+    float: none !important;
+}
+.password-encription select {
+    margin-bottom: 0px !important;
+    width: 150px !important;
+}
+
+.password-encription .help-block {
+    color: #000;
+}
+
+.password-encription alert p {
+   font-weight: bold;
+}
+
+.bootstrap-version {
+    display: block;
+    text-align: center;
+}
+
+.bootstrap-version button {
+    width: 150px;
+    height: 50px;
+    font-size: 18px;
+}
